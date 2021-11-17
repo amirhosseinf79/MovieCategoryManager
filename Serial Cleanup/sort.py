@@ -3,13 +3,6 @@ import os
 import sys
 
 def diffrences(movies, ignore):
-    movies_ = movies
-    movies = []
-
-    for movie in movies_:
-        if movie!=sys.argv[0]:
-            movies.append(movie)
-
     movies_len = len(movies)
     if movies_len>=3:
         mean = int(movies_len / 2) - 1
@@ -46,11 +39,19 @@ def diffrences(movies, ignore):
     return regex, format
 
 
-def proccess():
+def proccess(app_name):
     regex = input("Enter static Serial name: ")
     movies = os.listdir()
 
+    movies_ = movies
+    movies = []
+
+    for movie in movies_:
+        if movie!=app_name:
+            movies.append(movie)
+
     if regex:
+        main_movie = movies[mean + 1]
         format = re.split("\.", main_movie)[-1]
         regex = regex.strip()
     else:
@@ -64,7 +65,7 @@ def proccess():
     n = 1
     confirm = 0
     for movie in movies:
-        if movie==sys.argv[0]:
+        if movie==app_name:
             continue
 
         if len(movies)<100:
@@ -94,4 +95,6 @@ def proccess():
 
         n += 1
 
-proccess()
+app_name = re.split("\\\\", sys.argv[0])[-1]
+print(app_name)
+proccess(app_name)

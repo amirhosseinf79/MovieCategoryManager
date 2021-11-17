@@ -51,6 +51,14 @@ def proccess(app_name):
             movies.append(movie)
 
     if regex:
+        movies_len = len(movies)
+        if movies_len >= 3:
+            mean = int(movies_len / 2) - 1
+        elif movies_len == 2:
+            mean = 0
+        else:
+            return print("You must have 2 or more Movie")
+
         main_movie = movies[mean + 1]
         format = re.split("\.", main_movie)[-1]
         regex = regex.strip()
